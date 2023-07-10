@@ -1,14 +1,28 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 
 export default function TabTwoScreen() {
+  const params = useLocalSearchParams();
+  const router = useRouter();
+  const goBack = () => router.back();
+
+  console.log(params);
+
+  const url = 'https://www.monito.com/en/compare/transfer/gb/zm/gbp/usd/2000';
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={goBack}>
+          <Text style={styles.backText}>Go Back</Text>
+        </TouchableOpacity>
+        <Text style={styles.title}>Remittance Providers</Text>
+      </View>
+      <WebView source={{ uri: url }} style={styles.webview} />
     </View>
   );
 }
@@ -16,16 +30,25 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  header: {
+    marginTop: 30,
+    height: 60,
+    backgroundColor: '#58C436',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 15,
+  },
+  backText: {
+    color: '#FFFFFF',
+    fontSize: 18,
   },
   title: {
+    color: '#FFFFFF',
     fontSize: 20,
-    fontWeight: 'bold',
+    marginLeft: 15,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  webview: {
+    flex: 1,
   },
 });
