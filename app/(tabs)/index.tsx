@@ -22,7 +22,7 @@ export default function TabOneScreen() {
           marginBottom: 50,
         }}
       >
-        <Image source={require('../../assets/images/logo.png')} style={{ width: 163, height: 48 }} />
+        <Image source={require('../../assets/images/zim-logo.png')} style={{ width: 200, height: 40 }} />
       </View>
 
       <Image
